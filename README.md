@@ -18,6 +18,8 @@ I use at-least-once delivery. If a consumer receives a message but doesn't ACK i
 ### How would you refactor your queue into a Pub/Sub?
 I would refactor the queue around the append-only log that I already have. Instead of deleting a message globally once a consumer ACKs it, I'd introduce topics and subscriptions. Each subscription would maintain its own offset into the durable log. When a consumer acknowledges a message, we'd advance that subscription's offset rather than deleting the message globally. This allows multiple independent consumers to receive the same message.
 
+One thing worth clarifying: an ACK today doesn't actually erase anything from disk. It appends an ACK record to the log, which marks the message as done, and the message is only physically dropped later when the log gets compacted. So the log already holds on to messages after they've been acknowledged, which is most of what Pub/Sub needs. The refactor is mainly a change in meaning: an ACK would stop meaning "this message is finished for everyone" and start meaning "this subscription has moved past this message", and compaction would only drop a message once every subscription's offset had passed it.
+
 ### If you had more time, what other features would you add?
 
 If I had more time, I'd focus on features that improve reliability and operation rather than just adding more queue functionality.
