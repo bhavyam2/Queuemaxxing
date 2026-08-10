@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Queuemaxxing</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Queuemaxxing</h1>
+  <p class="sub">Durable HTTP message queue</p>
+</header>
+
+<main>
+  <section class="panel">
+    <h2>Queues</h2>
+    <form id="create-form" class="row">
+      <label>Name <input id="new-name" type="text" placeholder="orders" required></label>
+      <label>Ordering
+        <select id="new-ordering">
+          <option value="fifo">fifo</option>
+          <option value="lifo">lifo</option>
+        </select>
+      </label>
+      <button type="submit">Create</button>
+    </form>
+    <table id="queue-table">
+      <thead>
+        <tr><th>Name</th><th>Ordering</th><th>Ready</th><th>Delayed</th><th>In flight</th><th>Enqueued</th><th>Acked</th><th></th></tr>
+      </thead>
+      <tbody id="queue-rows"></tbody>
+    </table>
+    <p id="no-queues" class="empty">No queues yet.</p>
+  </section>
+
+  <section class="panel" id="selected-panel" hidden>
+    <h2>Queue <span id="selected-name"></span> <span id="selected-ordering" class="tag"></span></h2>
+
+    <div class="columns">
+      <div>
+        <h3>Send</h3>
+        <form id="send-form">
+          <label>Body (JSON)
+            <textarea id="send-body" rows="4">{"task":"resize-image"}</textarea>
+          </label>
+          <div class="row">
+            <label>Priority <input id="send-priority" type="number" value="0" step="1"></label>
+            <label>Delay (s) <input id="send-delay" type="number" value="0" min="0" step="1"></label>
+          </div>
+          <button type="submit">Send</button>
+        </form>
+        <p class="hint">Higher priority is delivered first. Ordering breaks ties within a priority.</p>
+      </div>
+
+      <div>
+        <h3>Receive</h3>
+        <form id="receive-form" class="row">
+          <label>Visibility (s) <input id="recv-visibility" type="number" value="30" min="0" step="1"></label>
+          <label>Wait (s) <input id="recv-wait" type="number" value="0" min="0" max="60" step="1"></label>
+          <button type="submit">Receive</button>
+        </form>
+        <p class="hint">Wait above zero long polls: the request parks until a message arrives.</p>
+      </div>
+    </div>
+
+    <h3>Held deliveries</h3>
+    <p id="no-held" class="empty">Nothing received yet.</p>
+    <table id="held-table" hidden>
+      <thead>
+        <tr><th>Message</th><th>Seq</th><th>Priority</th><th>Attempt</th><th>Body</th><th></th></tr>
+      </thead>
+      <tbody id="held-rows"></tbody>
+    </table>
+  </section>
+</main>
+
+<div id="log-panel">
+  <h3>Activity</h3>
+  <ul id="log"></ul>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 0 2rem;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  color: #1c1c1c;
+  background: #f6f6f4;
+}
+
+header {
+  padding: 1.25rem 1.5rem;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+h1 { margin: 0; font-size: 1.25rem; font-weight: 600; }
+h2 { margin: 0 0 0.75rem; font-size: 1rem; font-weight: 600; }
+h3 { margin: 1rem 0 0.5rem; font-size: 0.875rem; font-weight: 600; }
+.sub { margin: 0.25rem 0 0; color: #666; }
+
+main { padding: 1.5rem; max-width: 1100px; }
+
+.panel {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 1rem 1.25rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+label {
+  display: block;
+  font-size: 0.8125rem;
+  color: #444;
+}
+
+input, select, textarea, button {
+  font-family: inherit;
+  font-size: 0.875rem;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid #bbb;
+  border-radius: 2px;
+  background: #fff;
+  color: inherit;
+}
+
+input, select { display: block; margin-top: 0.25rem; }
+input[type="number"] { width: 7rem; }
+textarea { width: 100%; margin-top: 0.25rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+button {
+  background: #2b2b2b;
+  color: #fff;
+  border-color: #2b2b2b;
+  cursor: pointer;
+}
+
+button.secondary { background: #fff; color: #2b2b2b; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+}
+
+th { font-weight: 600; color: #555; font-size: 0.8125rem; }
+td.num { font-variant-numeric: tabular-nums; }
+tr.selected { background: #f0f4f8; }
+
+code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.8125rem; }
+
+.tag {
+  font-size: 0.75rem;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid #bbb;
+  border-radius: 2px;
+  color: #555;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.empty { color: #888; font-style: italic; }
+.hint { color: #666; font-size: 0.8125rem; margin: 0.5rem 0 0; }
+
+#log-panel {
+  max-width: 1100px;
+  padding: 0 1.5rem;
+}
+
+#log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 14rem;
+  overflow-y: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8125rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+#log li { padding: 0.25rem 0.5rem; border-bottom: 1px solid #f0f0f0; }
+#log li.error { color: #a00; }
+#log .time { color: #888; margin-right: 0.5rem; }
+
+.name-button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #14509c;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.875rem;
+}
+
+.actions { display: flex; gap: 0.375rem; }
+.actions button { padding: 0.2rem 0.45rem; font-size: 0.8125rem; }

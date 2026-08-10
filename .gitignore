@@ -1,0 +1,7 @@
+# Runtime state. Each queue's append-only log is written here at run time.
+data/*.log
+data/*.log.tmp
+
+# Build output.
+/server
+/queuemaxxing
